@@ -1,7 +1,5 @@
 # Flask Dashboard
-This is a little project I've been working on to improve my Python and Flask skills.
-
-You're free to use this code in any way you wish. Feel free to submit pull requests.
+This is a little project I've (Matt) been working on to improve my Python and Flask skills. It's intended use is to demonstrate beginner-level code for beginner-level developers. You're free to use this code in any way you wish. Post a pull request with any ideas, but please keep in mind this repo is meant for beginner programmers.
 
 ## Set up
 
@@ -30,3 +28,6 @@ Add further instructions here
 
 ### Email settings
 I'm using SMTP2GO as an email service to keep things simple. You're free to use whichever service you require.
+
+#### How to change the email template
+More information to follow.
