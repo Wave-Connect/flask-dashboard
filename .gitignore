@@ -1,0 +1,6 @@
+# Virtual environment
+/venv/*
+.flaskenv
+
+# Cached files
+*.pyc
