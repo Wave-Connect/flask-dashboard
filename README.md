@@ -1,4 +1,5 @@
 
+
 # Flask Dashboard
 This is a little project I've (Matt) been working on to improve my Python and Flask skills. It's intended use is to demonstrate beginner-level code for beginner-level developers. You're free to use this code in any way you wish. Post a pull request with any ideas, but please keep in mind this repo is meant for beginner programmers.
 
@@ -48,7 +49,7 @@ MAIL_PORT=587
 MAIL_USE_TLS=1
 MAIL_USERNAME=<your-gmail-username>
 MAIL_PASSWORD=<your-gmail-password>
-MAIL_SENDER=<email-address-to-send-from>
+MAIL_SENDER=<email-of-sender>
 ```
 Gmail requires that your account is enabled for "less secure apps". You can read more about that [here](https://support.google.com/accounts/answer/6010255?hl=en).
 
@@ -63,6 +64,24 @@ I've set up both email and file error handling. You can choose to keep as is, or
 
 Error logs will be saved to logs/dashboard.log (new folder will be created if not already available).
 
-The app is using noreply@MAIL_USERNAME to send error emails. You can change this manually, or add another entry to config. Look at the "# Log errors" section.
+The app is using MAIL_SENDER to send error emails. Simply change this in `config.py` or `.flaskenv`.
 
 Any email addresses added to the config "ADMINS" will receive error messages. This should be in the form of a list. For example: `ADMINS = ['admin1@example.com', 'admin2@example.com']`
+
+### Displaying dates and times
+There are a few ways to display dates and times with jinja templates thanks to the flask-moment library.
+
+To display a date and time such as **August 31, 2020 7:01 PM** use:
+```html
+<!-- Format -->
+{{ moment(dateofthing).format('LLL') }}
+<!-- Example -->
+{{ moment(user.last_seen).format('LLL') }}
+```
+To display a more human readable text such as **A few minutes ago** use:
+```html
+<!-- Format -->
+{{ moment(dateofthing) }}
+<!-- Example -->
+{{ moment(user.last_seen) }}
+```
