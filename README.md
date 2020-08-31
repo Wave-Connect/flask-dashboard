@@ -31,6 +31,9 @@ MAIL_PASSWORD = 'email-password'
 ADMINS = ['admin1@example.com', 'admin2@example.com']
 ```
 
+## Testing
+Go to root (`flask-dashboard`) and run python tests.py
+
 ## Notes
 
 ### Email settings
