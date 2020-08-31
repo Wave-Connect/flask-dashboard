@@ -52,8 +52,11 @@ MAIL_SENDER=<email-address-to-send-from>
 ```
 Gmail requires that your account is enabled for "less secure apps". You can read more about that [here](https://support.google.com/accounts/answer/6010255?hl=en).
 
+#### Reset timeouts
+You can change the reset timeout by amending the 'RESET_TIMEOUT' int value in `config.py` or your `.flaskenv` file
+
 #### How to change the email template
-More information to follow.
+Simply change the .txt and .html templates inside the *app/templates/email* folder.
 
 ### Error logging
 I've set up both email and file error handling. You can choose to keep as is, or remove one or all methods. See `__init__.py` under "#Log errors" and you'll see sections for both email and file error handling.
