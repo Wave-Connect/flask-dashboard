@@ -48,6 +48,7 @@ MAIL_PORT=587
 MAIL_USE_TLS=1
 MAIL_USERNAME=<your-gmail-username>
 MAIL_PASSWORD=<your-gmail-password>
+MAIL_SENDER=<email-address-to-send-from>
 ```
 Gmail requires that your account is enabled for "less secure apps". You can read more about that [here](https://support.google.com/accounts/answer/6010255?hl=en).
 
