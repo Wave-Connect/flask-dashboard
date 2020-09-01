@@ -1,20 +1,13 @@
-{% extends "base.html" %}
+{% extends "./main/base.html" %}
 
 {% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
+    <h1>Sign In</h1>
+    <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}<br>
             {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}<br>
-            {% for error in form.email.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
@@ -25,13 +18,12 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
-            {% for error in form.password2.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
+    <p>New User? <a href="{{ url_for('auth.register') }}">Click to Register!</a></p>
+    <p>
+        Forgot Your Password?
+        <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+    </p>
 {% endblock %}

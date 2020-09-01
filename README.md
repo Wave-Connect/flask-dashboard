@@ -28,6 +28,7 @@ MAIL_PORT = 587
 MAIL_USE_TLS = 1
 MAIL_USERNAME = 'email-username'
 MAIL_PASSWORD = 'email-password'
+LOG_TO_STDOUT = 0
 # Below should be a list
 ADMINS = ['admin1@example.com', 'admin2@example.com']
 ```
