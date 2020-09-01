@@ -10,6 +10,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     RESET_TIMEOUT = os.environ.get('RESET_TIMEOUT') or 3600
+    LOG_TO_STDOUT = os.environ.get('RESET_TIMEOUT') or 0
     # Mail settings
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 587)
