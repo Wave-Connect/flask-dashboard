@@ -1,0 +1,32 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Last seen</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <th scope="row"><a href="{{ url_for('main.user', username=user.username) }}"><img src="{{ user.avatar(50) }}"></a></th>
+      <td scope="row"><a href="{{ url_for('main.user', username=user.username) }}">{{ user.username }}</a></td>
+      <td scope="row">{{ moment(user.last_seen).format('LLL') }}</td>
+      <td scope="row">
+        {% if user == current_user %}
+        YOU
+        {% else %}
+        <button>Edit</button> <button>Delete</button></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+    <hr>
+
+{% endblock %}
