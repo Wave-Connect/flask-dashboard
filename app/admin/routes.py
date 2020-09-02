@@ -16,9 +16,9 @@ def users():
     return render_template(f'{path}user_list.html', users=users)
 
 
-@bp.route('/user/<username>')
+@bp.route('/user/<id>')
 @login_required
 def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
+    user = User.query.filter_by(id=id).first_or_404()
     page = request.args.get('page', 1, type=int)
     return render_template(f'{path}user.html', user=user)

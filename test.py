@@ -25,7 +25,7 @@ class UserModelCase(unittest.TestCase):
 
     def test_password_hashing(self):
         u = User(
-            username='matt',
+            email='matt@example.com',
             fname='Matthew',
             lname='Bingham')
         u.set_password('chicken')
@@ -33,7 +33,7 @@ class UserModelCase(unittest.TestCase):
         self.assertTrue(u.check_password('chicken'))
 
     def test_avatar(self):
-        u = User(username='john', email='john@example.com')
+        u = User(email='john@example.com')
         self.assertEqual(u.avatar(128), ('https://www.gravatar.com/avatar/'
                                          'd4c74594d841139328695756648b6bd6'
                                          '?d=identicon&s=128'))

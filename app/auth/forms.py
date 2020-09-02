@@ -5,13 +5,12 @@ from app.models import User
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     fname = StringField('First name', validators=[DataRequired()])
     lname = StringField('Last name', validators=[DataRequired()])
@@ -21,9 +20,9 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = User.query.filter_by(email=email.data).first()
         if user is not None:
-            raise ValidationError('Username taken. Please try a different username.')
+            raise ValidationError('Email in use, please try a different one.')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
