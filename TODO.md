@@ -1,4 +1,6 @@
-1. Remove 'username' and have email / password login / register only.
-1. It's possible to reset from link several times.
-1. Admin functions need protecting.
-1. How to add admin accounts?
+1. It's possible to reset from link several times. Change?
+1. Update testing for @admin_required, @login_required pages.
+1. Edit user function for admin
+1. Delete user function for admin
+1. Move current profile page to admin user single page
+1. Profile page should be my/profile (prefix my for users)
