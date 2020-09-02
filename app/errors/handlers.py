@@ -5,6 +5,10 @@ from app.errors import bp
 
 path = 'errors/'
 
+@bp.app_errorhandler(403)
+def not_found_error(error):
+    return render_template(f'{path}403.html'), 403
+
 @bp.app_errorhandler(404)
 def not_found_error(error):
     return render_template(f'{path}404.html'), 404

@@ -1,6 +1,3 @@
-
-
-
 # Flask Dashboard
 This is a little project I (Matt) have been working on to improve my Python and Flask skills. It's intended use is to demonstrate beginner-level code. You're free to use this code in any way you wish (a star or comment would be nice). Suggestion? Post a pull request with any ideas, but please keep in mind this repo is meant for beginner programmers.
 
@@ -23,18 +20,20 @@ You'll need to create a `.flaskenv` file in the flask-dashboard folder with the 
 
 ###### */flask-dashboard/.flaskenv*
 ```python
-# App config
+# App Config
 FLASK_APP=dashboard.py
 FLASK_ENV=development
+RESET_TIMEOUT = 3600
 # Mail config
-MAIL_SERVER=mail.smtp2go.com
+MAIL_SERVER = mail.smtp2go.com
 MAIL_PORT = 587
 MAIL_USE_TLS = 1
-MAIL_USERNAME = 'email-username'
-MAIL_PASSWORD = 'email-password'
-LOG_TO_STDOUT = 0
+MAIL_USERNAME = 'email_username'
+MAIL_PASSWORD = 'email_password'
+MAIL_SENDER = 'noreply@example.com'
+LOG_TO_STDOUT = 1
 # Below should be a list
-ADMINS = ['admin1@example.com', 'admin2@example.com']
+ADMINS = ['admin1@example.com', 'admin2@example.com', 'admin3@example.com']
 ```
 
 ### Create the database
@@ -59,6 +58,26 @@ python tests.py
 Go to root (`flask-dashboard`) and run python tests.py
 
 ## Notes
+
+### Admin role
+To protect a route, simply '@login_required' for users, or '@admin_required' for admins.
+
+```python
+#...
+@bp.route('/users')
+@login_required
+@admin_required
+def users():
+  #...
+```
+`@login_required` : Not logged in > Login page.
+`@admin_required` : Not logged in > Login page. Not admin > 403 page.
+
+
+#### Admin menu
+###### */includes/_nav_admin.html*
+Edit the links and they will automatically be included in the base.html template.
+
 
 ### Email settings
 I'm using SMTP2GO as an email service to keep things simple. You're free to use whichever service you require.

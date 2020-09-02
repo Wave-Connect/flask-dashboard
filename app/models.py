@@ -22,6 +22,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
+    admin = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -89,6 +90,7 @@ class User(UserMixin, db.Model):
         return user
 
 
+# Do this last
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

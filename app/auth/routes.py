@@ -1,4 +1,5 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import (render_template, flash, redirect, url_for,
+    request, current_app)
 from app.auth.forms import (LoginForm, RegistrationForm,
     ResetPasswordRequestForm, ResetPasswordForm)
 from app import db
@@ -42,10 +43,15 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        if form.email.data in current_app.config['ADMINS']:
+            admin = True
+        else:
+            admin = False
         user = User(
             email=form.email.data,
             fname=form.fname.data,
-            lname=form.lname.data
+            lname=form.lname.data,
+            admin=admin
             )
         user.set_password(form.password.data)
         db.session.add(user)
@@ -53,6 +59,7 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('auth.login'))
     return render_template(f'{path}register.html', title='Register', form=form)
+
 
 @bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():

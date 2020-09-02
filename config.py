@@ -18,4 +18,4 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     MAIL_SENDER = os.environ.get('MAIL_SENDER')
-    ADMINS = os.environ.get('MAIL_PASSWORD')
+    ADMINS = os.environ.get('ADMINS')
