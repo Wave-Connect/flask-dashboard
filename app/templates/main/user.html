@@ -1,20 +1,16 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-    <table>
-        <tr valign="top">
-            <td><img src="{{ user.avatar(128) }}"></td>
-            <td><h1>User: {{ user.username }}</h1></td>
-            {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-            {% if user.last_seen %}<p>Last seen {{ moment(user.last_seen).fromNow() }}</p>{% endif %}
-            {% if user == current_user %}
-            <p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
-            {% else %}
-            {% include "includes/_edit.html" %}
-            {% include "includes/_delete.html" %}
-            {% endif %}
-        </tr>
-    </table>
-    <hr>
 
+<img src="{{ user.avatar(128) }}">
+<h1>User: {{ user.username }}</h1>
+<h2>{{ user.fname }} {{ user.lname }}</h2>
+{% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+{% if user.last_seen %}<p>Last seen {{ moment(user.last_seen).fromNow() }}</p>{% endif %}
+{% if user == current_user %}
+<p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
+{% else %}
+{% include "includes/_edit.html" %}
+{% include "includes/_delete.html" %}
+{% endif %}
 {% endblock %}

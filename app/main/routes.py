@@ -8,6 +8,8 @@ from app.models import User
 from app.main import bp
 
 
+path = 'main/'
+
 @bp.before_app_request
 def before_request():
     if current_user.is_authenticated:
@@ -19,7 +21,7 @@ def before_request():
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    return render_template('main/index.html', title=('Home'))
+    return render_template(f'{path}index.html', title=('Home'))
 
 
 @bp.route('/user/<username>')
@@ -27,7 +29,7 @@ def index():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
-    return render_template('main/user.html', user=user)
+    return render_template(f'{path}user.html', user=user)
 
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
@@ -36,12 +38,16 @@ def edit_profile():
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
+        current_user.fname = form.fname.data
+        current_user.lname = form.lname.data
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash(('Your changes have been saved.'))
         return redirect(url_for('main.edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
+        form.fname.data = current_user.fname
+        form.lname.data = current_user.lname
         form.about_me.data = current_user.about_me
-    return render_template('main/edit_profile.html', title=('Edit Profile'),
+    return render_template(f'{path}edit_profile.html', title=('Edit Profile'),
                            form=form)
