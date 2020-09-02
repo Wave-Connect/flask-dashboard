@@ -1,37 +1,122 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        {% if title %}
-        <title>{{ title }} - Dashboard</title>
-        {% else %}
-        <title>Dashboard</title>
+<head>
+  <!-- Meta tags -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta name="viewport" content="width=device-width" />
+
+  <!-- Favicon and title -->
+  <link rel="icon" href="path/to/fav.png">
+  {% if title %}
+  <title>{{ title }} - Dashboard</title>
+  {% else %}
+  <title>Dashboard</title>
+  {% endif %}
+
+  {% include "includes/_styles.html" %}
+  {{ moment.include_jquery() }}
+  {{ moment.include_moment() }}
+</head>
+<body class="dark-mode with-custom-webkit-scrollbars with-custom-css-scrollbars" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true" data-set-preferred-theme-onload="true">
+  <!-- Modals go here -->
+  <!-- Reference: https://www.gethalfmoon.com/docs/modal -->
+
+  <!-- Page wrapper start -->
+  <div class="page-wrapper with-navbar with-sidebar with-navbar-fixed-bottom"
+    data-sidebar-type="overlayed-sm-and-down">
+
+
+    <!-- Sticky alerts (toasts), empty container -->
+    <!-- Reference: https://www.gethalfmoon.com/docs/sticky-alerts-toasts -->
+    <div class="sticky-alerts"></div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <!-- Navbar start -->
+    <nav class="navbar">
+      <div class="navbar-content">
+                      <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()">
+                          <i class="fa fa-bars" aria-hidden="true"></i>
+                      </button>
+                  </div>
+      Dashboard:
+      <a href="{{ url_for('main.index') }}">Home</a>
+      {% if current_user.is_anonymous %}
+      <a href="{{ url_for('auth.login') }}">Login</a>
+      {% else %}
+      <a href="{{ url_for('main.edit_profile', id=current_user.id) }}">Profile</a>
+      <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% if current_user.admin %}
+        {% include 'includes/_nav_admin.html' %}
         {% endif %}
-        {{ moment.include_jquery() }}
-        {{ moment.include_moment() }}
-    </head>
-    <body>
-      <div>
-          Dashboard:
-          <a href="{{ url_for('main.index') }}">Home</a>
-          {% if current_user.is_anonymous %}
-          <a href="{{ url_for('auth.login') }}">Login</a>
-          {% else %}
-          <a href="{{ url_for('main.edit_profile', id=current_user.id) }}">Profile</a>
-          <a href="{{ url_for('auth.logout') }}">Logout</a>
-            {% if current_user.admin %}
-            {% include 'includes/_nav_admin.html' %}
-            {% endif %}
-          {% endif %}
-      </div>
-        <hr>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-    </body>
+      {% endif %}
+      <!-- Reference: https://www.gethalfmoon.com/docs/navbar -->
+    </nav>
+    <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
+    <div class="sidebar">
+      <!-- Reference: https://www.gethalfmoon.com/docs/sidebar -->
+      <!-- Sidebar links (with icons) and titles -->
+      <h5 class="sidebar-title">Getting started</h5>
+      <div class="sidebar-divider"></div>
+      <a href="#" class="sidebar-link sidebar-link-with-icon active">
+        <span class="sidebar-icon">
+          <i class="fa fa-code" aria-hidden="true"></i>
+        </span>
+        Installation
+      </a>
+      <a href="#" class="sidebar-link sidebar-link-with-icon">
+        <span class="sidebar-icon">
+          <i class="fa fa-terminal" aria-hidden="true"></i>
+        </span>
+        CLI commands
+      </a>
+      <br />
+      <h5 class="sidebar-title">Components</h5>
+      <div class="sidebar-divider"></div>
+      <a href="#" class="sidebar-link sidebar-link-with-icon">
+        <span class="sidebar-icon">
+          <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+        </span>
+        File explorer
+      </a>
+      <a href="#" class="sidebar-link sidebar-link-with-icon">
+        <span class="sidebar-icon">
+          <i class="fa fa-table" aria-hidden="true"></i>
+        </span>
+        Spreadsheet
+      </a>
+      <a href="#" class="sidebar-link sidebar-link-with-icon">
+        <span class="sidebar-icon">
+          <i class="fa fa-map-o" aria-hidden="true"></i>
+        </span>
+        Map
+      </a>
+      <a href="#" class="sidebar-link sidebar-link-with-icon">
+        <span class="sidebar-icon">
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+        </span>
+        Messenger
+      </a>
+    </div>
+    <div class="content-wrapper">
+
+    {% block content %}{% endblock %}
+  </div>
+
+  </div>
+
+
+
+
+  {% include "includes/_scripts.html" %}
+
+</body>
 </html>
