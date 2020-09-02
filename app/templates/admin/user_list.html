@@ -14,21 +14,17 @@
   <tbody>
     {% for user in users %}
     <tr>
-      <th scope="row"><a href="{{ url_for('main.user', id=user.id) }}"><img src="{{ user.avatar(50) }}"></a></th>
+      <th scope="row"><img src="{{ user.avatar(50) }}"></th>
       <td scope="row">{{ user.email }}</td>
       <td scope="row">
-      {% if user.fname or user.lname %}
-        <a href="{{ url_for('main.user',  id=user.id) }}">{{ user.fname }} {{ user.lname }}</a>
-        {% else %}
-        ---.
-        {% endif %}
+        {{ user.fname }} {{ user.lname }}
       </td>
       <td scope="row">{{ moment(user.last_seen).format('LLL') }}</td>
       <td scope="row">
         {% if user == current_user %}
         YOU
         {% else %}
-        <button>Edit</button> <button>Delete</button></td>
+        <a href="{{ url_for('admin.user_edit',  id=user.id) }}">Edit</a> <a href="{{ url_for('admin.user_edit',  id=user.id) }}">Delete</a></td>
         {% endif %}
     </tr>
     {% endfor %}

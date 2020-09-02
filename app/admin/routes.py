@@ -13,7 +13,7 @@ path = 'admin/'
 @bp.route('/users')
 @login_required
 @admin_required
-def users():
+def user_list():
     users = User.query.all()
     page = request.args.get('page', 1, type=int)
     return render_template(f'{path}user_list.html', users=users)
@@ -22,7 +22,7 @@ def users():
 @bp.route('/user/<id>')
 @login_required
 @admin_required
-def user(username):
+def user_edit(id):
     user = User.query.filter_by(id=id).first_or_404()
     page = request.args.get('page', 1, type=int)
-    return render_template(f'{path}user.html', user=user)
+    return render_template(f'{path}user_edit.html', user=user)

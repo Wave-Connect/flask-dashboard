@@ -23,15 +23,6 @@ def before_request():
 def index():
     return render_template(f'{path}index.html', title=('Home'))
 
-
-@bp.route('/user/<id>')
-@login_required
-def user(id):
-    user = User.query.filter_by(id=id).first_or_404()
-    # page = request.args.get('page', 1, type=int)
-    return render_template(f'{path}user.html', user=user)
-
-
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():

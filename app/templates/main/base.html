@@ -15,7 +15,7 @@
           {% if current_user.is_anonymous %}
           <a href="{{ url_for('auth.login') }}">Login</a>
           {% else %}
-          <a href="{{ url_for('main.user', id=current_user.id) }}">Profile</a>
+          <a href="{{ url_for('main.edit_profile', id=current_user.id) }}">Profile</a>
           <a href="{{ url_for('auth.logout') }}">Logout</a>
             {% if current_user.admin %}
             {% include 'includes/_nav_admin.html' %}
