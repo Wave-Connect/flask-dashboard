@@ -142,3 +142,5 @@ To display a more human readable text such as **A few minutes ago** use:
 ```
 ## Credits
 Much of the code I've used in the dashboard app comes from the [Flask Mega-Tutorial]([https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)), created by the talented [Miguel Grinberg](https://blog.miguelgrinberg.com/post/about-me).
+
+The dashboard was built with the [Halfmoon framework](https://www.gethalfmoon.com/docs/introduction/).

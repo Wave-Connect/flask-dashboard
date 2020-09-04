@@ -1,29 +1,35 @@
 {% extends "./main/base.html" %}
-
 {% block content %}
-    <h1>Sign In</h1>
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=32) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
-    </form>
-    <p>New User? <a href="{{ url_for('auth.register') }}">Click to Register!</a></p>
-    <p>
-        Forgot Your Password?
-        <a href="{{ url_for('auth.reset_password_request') }}">Click to Reset It</a>
+<h1>Sign In</h1>
+<!-- Start form -->
+<form action="" method="post"  class="w-400 mw-full" novalidate>
+  {{ form.hidden_tag() }}
+  <div class="form-group">
+    {{ form.email.label(class='required', for='email') }}
+    {% for error in form.email.errors %}
+    <div class="invalid-feedback">
+      {{ error }}
+    </div>
+    {% endfor %}
+    {{ form.email(type='email', class='form-control', id='email', placeholder='Email', required='reqiured') }}
+  </div>
+  <div class="form-group">
+    {{ form.password.label(class='required', for='password') }}
+    {% for error in form.password.errors %}
+    <div class="invalid-feedback">
+      {{ error }}
+    </div>
+    {% endfor %}
+    {{ form.password(type='password', class='form-control', id='password', placeholder='Password', required='reqiured') }}
+  </div>
+  <div class="form-group">
+    <div class="custom-switch">
+      {{ form.remember_me(type='checkbox', id='remember_me', value="") }}
+      {{ form.remember_me.label(for='remember_me') }}
+    </div>
+  </div>
+  {{ form.submit(class='btn btn-primary') }}
+</form>
+<p><a href="{{ url_for('auth.reset_password_request') }}">Forgot Your Password?</a>
     </p>
 {% endblock %}

@@ -1,0 +1,20 @@
+<!-- First comes the modal -->
+<div class="modal" id="model-delete" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <a href="#" class="close" role="button" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </a>
+      <h5 class="modal-title">Really delete {{ user.fname }} {{ user.fname }}?</h5>
+      <p>
+        This action cannot be undone.
+      </p>
+      <div class="text-right mt-20"> <!-- text-right = text-align: right, mt-20 = margin-top: 2rem (20px) -->
+        <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <a href="#" class="btn mr-5" role="button">Close</a>
+        {{ form.submit(class='btn btn-danger') }}
+      </div>
+    </div>
+  </div>
+</div>
