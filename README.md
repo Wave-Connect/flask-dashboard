@@ -1,7 +1,7 @@
 # Flask Dashboard
 This is a little project I (Matt) have been working on to improve my Python and Flask skills. It's intended use is to demonstrate beginner-level code. You're free to use this code in any way you wish (a star or comment would be nice). Suggestion? Post a pull request with any ideas, but please keep in mind this repo is meant for beginner programmers.
 
-![Screenshot](https://github.com/Wave-Connect/flask-dashboard/blob/master/screenshot.png)
+![Screenshot](https://github.com/Wave-Connect/flask-dashboard/blob/master/screenshot1.png)
 
 ## Set up
 
