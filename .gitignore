@@ -4,3 +4,6 @@
 
 # Cached files
 *.pyc
+
+# Misc
+setup.bat

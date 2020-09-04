@@ -1,36 +1,41 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Username</th>
-      <th scope="col">Name</th>
-      <th scope="col">Last seen</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in users %}
-    <tr>
-      <th scope="row"><img src="{{ user.avatar(50) }}"></th>
-      <td scope="row">{{ user.email }}</td>
-      <td scope="row">
-        {{ user.fname }} {{ user.lname }}
-      </td>
-      <td scope="row">{{ moment(user.last_seen).format('LLL') }}</td>
-      <td scope="row">
-        {% if user == current_user %}
-        YOU
-        {% else %}
-        <a href="{{ url_for('admin.user_edit',  id=user.id) }}">Edit</a> <a href="{{ url_for('admin.user_edit',  id=user.id) }}">Delete</a></td>
-        {% endif %}
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-    <hr>
-
+<a href="{{ url_for('admin.user_create') }}" class="btn btn-primary" role="button">Create new</a>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="hidden-sm-and-down"></th>
+        <th>Person</th>
+        <th>Last seen</th>
+        <th></th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      {% if user == current_user %}
+      {% else %}
+      <tr>
+        <td class="hidden-sm-and-down"><img src="{{ user.avatar(40) }}" class="img-fluid rounded-circle"></td>
+        <th>
+          <a href="{{ url_for('admin.user_detail',  id=user.id) }}">{{ user.fname }} {{ user.lname }}</a><br>
+          <span class="font-size-12 hidden-sm-and-down">{{ user.email }}</span>
+        </th>
+        <td>{{ moment(user.last_seen).format('LLL') }}</td>
+        <td>
+          {% if user.admin %}
+          <span class="badge badge-primary badge-pill">Admin</span>
+          {% endif %}
+        </td>
+        <td class="text-right">
+          <a href="{{ url_for('admin.user_edit', id=user.id) }}" class="btn btn-sm mr-15">Edit</a>
+        </td>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

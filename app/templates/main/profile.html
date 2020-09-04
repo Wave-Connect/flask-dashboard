@@ -1,16 +1,20 @@
 {% extends "main/base.html" %}
 
 {% block content %}
+<div class="d-sm-flex justify-content-center">
+  <div class="flex-fill">
+    <div class="text-center">
+      <img src="{{ current_user.avatar(250) }}" class="img-fluid rounded-circle">
+    </div>
+  </div>
+  <div class="flex-fill">
+    <h1>{{ current_user.fname }} {{ current_user.lname }}</h1>
+    <h5>User: {{ current_user.email }}</h5>
+    {% if current_user.about_me %}<p>{{ current_user.about_me }}</p>{% endif %}
+    {% if current_user.last_seen %}<p>Last seen {{ moment(current_user.last_seen).fromNow() }}</p>{% endif %}
+    <p><a href="{{ url_for('main.profile_edit') }}">Edit your profile</a></p>
+  </div>
+</div>
 
-<img src="{{ user.avatar(128) }}">
-<h1>User: {{ user.email }}</h1>
-<h2>{{ user.fname }} {{ user.lname }}</h2>
-{% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-{% if user.last_seen %}<p>Last seen {{ moment(user.last_seen).fromNow() }}</p>{% endif %}
-{% if user == current_user %}
-<p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
-{% else %}
-{% include "includes/_edit.html" %}
-{% include "includes/_delete.html" %}
-{% endif %}
+
 {% endblock %}

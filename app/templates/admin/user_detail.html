@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+{% include ('includes/_modal_delete.html') %}
+
+<div class="d-sm-flex justify-content-center">
+  <div class="flex-fill">
+    <div class="text-center">
+      <img src="{{ user.avatar(250) }}" class="img-fluid rounded-circle">
+    </div>
+  </div>
+  <div class="flex-fill">
+    <h1>{{ title }}
+      {% if user.admin %}
+        <span class="badge badge-primary badge-pill">Admin</span>
+        {% endif %}</h1>
+    <h5>User: {{ user.email }}</h5>
+    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+    {% if user.last_seen %}<p>Last seen {{ moment(user.last_seen).fromNow() }}</p>{% endif %}
+    {% if user == current_user %}
+    <p><a href="{{ url_for('admin.user_edit') }}">Edit your profile</a></p>
+    {% else %}
+    <a href="{{ url_for('admin.user_edit', id=user.id) }}" class="btn btn-sm mr-15">Edit</a>
+    <a href="#model-delete" class="btn btn-danger btn-sm">Delete</a>
+    {% endif %}
+  </div>
+</div>
+
+
+{% endblock %}

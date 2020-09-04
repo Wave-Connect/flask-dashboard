@@ -23,9 +23,14 @@ def before_request():
 def index():
     return render_template(f'{path}index.html', title=('Home'))
 
-@bp.route('/edit_profile', methods=['GET', 'POST'])
+@bp.route('/profile')
 @login_required
-def edit_profile():
+def profile():
+    return render_template(f'{path}profile.html', title=('My profile'))
+
+@bp.route('/profile/edit', methods=['GET', 'POST'])
+@login_required
+def profile_edit():
     form = EditProfileForm(current_user.email)
     if form.validate_on_submit():
         current_user.email = form.email.data
@@ -34,11 +39,12 @@ def edit_profile():
         current_user.about_me = form.about_me.data
         db.session.commit()
         flash(('Your changes have been saved.'))
-        return redirect(url_for('main.edit_profile'))
+        return redirect(url_for('main.profile_edit'))
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.fname.data = current_user.fname
         form.lname.data = current_user.lname
         form.about_me.data = current_user.about_me
-    return render_template(f'{path}edit_profile.html', title=('Edit Profile'),
-                           form=form)
+    return render_template(f'{path}profile_edit.html',
+                            title=('Edit Profile'),
+                            form=form)
